@@ -3,5 +3,6 @@ function StringCalculator() {
 }
 
 StringCalculator.prototype.add = function (numbers) {
-  return 0
+  if (numbers == "") return 0
+  return 1
 }
