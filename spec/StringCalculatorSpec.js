@@ -33,8 +33,28 @@ describe("StringCalculator", function () {
             expect(stringCalculator.add("7,3,4,5,8")).toEqual(27)
         })
 
-        it("can add numbers separated by the line", function() {
+        it("can add numbers separated by the newline and comma", function() {
             expect(stringCalculator.add("1\n2,3")).toEqual(6)
+        })
+
+        it("can add numbers separated by the comma and newline", function() {
+            expect(stringCalculator.add("1,2\n3")).toEqual(6)
+        })
+
+        it("can add numbers separated by the newline only", function () {
+            expect(stringCalculator.add("1\n2")).toEqual(3)
+        })
+
+        it("can add numbers with custom delimiter", function () {
+            expect(stringCalculator.add("//;\n1;2")).toEqual(3)
+        })
+
+        it("can add other numbers with custom delimiter", function () {
+            expect(stringCalculator.add("//;\n2;2")).toEqual(4)
+        })
+
+        it("can add numbers with other delimiter", function () {
+            expect(stringCalculator.add("//.\n2.2")).toEqual(4)
         })
     })
 

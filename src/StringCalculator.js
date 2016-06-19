@@ -9,15 +9,32 @@ StringCalculator.Zero = 0
 StringCalculator.prototype.add = function (numbers) {
     if (isEmpty(numbers)) return StringCalculator.Zero
 
+    if (includesCustomDelimiter(numbers)) {
+        this.delimiter = extractCustomDelimiterFrom(numbers)
+        return this.add(extractNumbers(numbers))
+    }
+
     if (this.includesDelimiter(numbers)) {
         var splitted = this.splitByDelimiter(numbers)
         var first = splitted[0]
         var second = splitted[1]
 
-        return this.parseInt(first) + this.add(second)
+        return this.add(first) + this.add(second)
     }
 
     return this.parseInt(numbers)
+}
+
+function extractNumbers(numbers) {
+    return numbers.substring(4);
+}
+
+function extractCustomDelimiterFrom(numbers) {
+    return numbers[2];
+}
+
+function includesCustomDelimiter(numbers) {
+    return numbers.substring(0, 2) == "//";
 }
 
 StringCalculator.prototype.parseInt = function (string) {
@@ -25,7 +42,8 @@ StringCalculator.prototype.parseInt = function (string) {
 }
 
 StringCalculator.prototype.includesDelimiter = function (numbers) {
-    return numbers.includes(this.delimiter)
+    return numbers.includes(this.delimiter) ||
+            numbers.includes(this.secondDelimiter)
 }
 
 StringCalculator.prototype.splitByDelimiter = function (numbers) {
