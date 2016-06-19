@@ -1,6 +1,7 @@
-function StringCalculator(radix, delimiter) {
+function StringCalculator(radix, delimiter, secondDelimiter) {
     this.radix = radix
     this.delimiter = delimiter
+    this.secondDelimiter = secondDelimiter
 }
 
 StringCalculator.Zero = 0
@@ -28,7 +29,8 @@ StringCalculator.prototype.includesDelimiter = function (numbers) {
 }
 
 StringCalculator.prototype.splitByDelimiter = function (numbers) {
-    return split(numbers, this.delimiter)
+    return split(numbers, this.secondDelimiter) ||
+            split(numbers, this.delimiter)
 }
 
 function isEmpty(numbers) {
@@ -37,6 +39,7 @@ function isEmpty(numbers) {
 
 function split(string, delimiter) {
     var index = string.indexOf(delimiter)
+    if (index < 0) return null
     return [
         string.substring(0, index),
         string.substring(index + 1)

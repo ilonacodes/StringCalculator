@@ -6,7 +6,7 @@ describe("StringCalculator", function () {
 
     context("given decimal string calculator", function () {
         beforeEach(function () {
-            stringCalculator = new StringCalculator(10, comma)
+            stringCalculator = new StringCalculator(10, comma, "\n")
         })
 
         it("can add numbers", function () {
@@ -32,9 +32,13 @@ describe("StringCalculator", function () {
         it("can add arbitrary amount of numbers", function () {
             expect(stringCalculator.add("7,3,4,5,8")).toEqual(27)
         })
+
+        it("can add numbers separated by the line", function() {
+            expect(stringCalculator.add("1\n2,3")).toEqual(6)
+        })
     })
 
-    context("given decimal string calculator", function () {
+    context("given binary string calculator", function () {
         beforeEach(function () {
             stringCalculator = new StringCalculator(2, comma)
         })
